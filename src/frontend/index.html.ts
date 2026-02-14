@@ -522,6 +522,11 @@ async function checkSingle() {
     });
     
     const data = await response.json();
+    
+    if (data.error) {
+        throw new Error(data.message || 'Unknown error occurred');
+    }
+    
     lastResults = [data];
     displayResults([data]);
 }
@@ -542,6 +547,11 @@ async function checkBulk() {
     });
     
     const data = await response.json();
+    
+    if (data.error) {
+        throw new Error(data.message || 'Unknown error occurred');
+    }
+    
     lastResults = data.results;
     displayResults(data.results);
 }
