@@ -1,0 +1,32 @@
+{
+  "name": "reputation-hub",
+  "version": "1.0.0",
+  "description": "Threat intelligence platform for IP/Domain/Hash reputation checking across 8 major providers",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "threat-intelligence",
+    "security",
+    "cloudflare-workers",
+    "ip-reputation",
+    "domain-reputation",
+    "hash-checking",
+    "virustotal",
+    "abuseipdb",
+    "otx",
+    "urlhaus",
+    "shodan"
+  ],
+  "author": "Reputation Hub",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240512.0",
+    "typescript": "^5.4.5",
+    "wrangler": "^3.57.0"
+  }
+}
