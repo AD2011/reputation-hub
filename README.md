@@ -55,12 +55,12 @@
    You need two KV namespaces: one for caching results and one for analytics.
    ```bash
    # Create production namespaces
-   wrangler kv:namespace create CACHE
-   wrangler kv:namespace create ANALYTICS
+   wrangler kv namespace create CACHE
+   wrangler kv namespace create ANALYTICS
 
    # Create preview namespaces (for development)
-   wrangler kv:namespace create CACHE --preview
-   wrangler kv:namespace create ANALYTICS --preview
+   wrangler kv namespace create CACHE --preview
+   wrangler kv namespace create ANALYTICS --preview
    ```
 
 5. **Update Configuration**

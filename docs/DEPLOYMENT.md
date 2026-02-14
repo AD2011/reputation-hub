@@ -30,20 +30,20 @@ Run the following commands in your terminal and **save the IDs** output by each 
 **1. Create Production Namespaces:**
 
 ```bash
-wrangler kv:namespace create CACHE
+wrangler kv namespace create CACHE
 # Output: { binding = "CACHE", id = "<YOUR_CACHE_ID>" }
 
-wrangler kv:namespace create ANALYTICS
+wrangler kv namespace create ANALYTICS
 # Output: { binding = "ANALYTICS", id = "<YOUR_ANALYTICS_ID>" }
 ```
 
 **2. Create Preview Namespaces (Optional but recommended for `wrangler dev`):**
 
 ```bash
-wrangler kv:namespace create CACHE --preview
+wrangler kv namespace create CACHE --preview
 # Output: { binding = "CACHE", preview_id = "<YOUR_CACHE_PREVIEW_ID>" }
 
-wrangler kv:namespace create ANALYTICS --preview
+wrangler kv namespace create ANALYTICS --preview
 # Output: { binding = "ANALYTICS", preview_id = "<YOUR_ANALYTICS_PREVIEW_ID>" }
 ```
 
