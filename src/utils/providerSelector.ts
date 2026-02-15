@@ -67,9 +67,9 @@ export function getAvailableProviders(apiKeys: Record<string, string>): Provider
   }
   
   // Always add URLhaus since it doesn't require a key
-  if (!available.includes('urlhaus')) {
-    available.push('urlhaus');
-  }
+  // if (!available.includes('urlhaus')) {
+  //   available.push('urlhaus');
+  // }
   
   return available;
 }

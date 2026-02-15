@@ -678,7 +678,25 @@ async function showSettings() {
     const form = document.getElementById('api-keys-form');
     form.innerHTML = '';
     
-    data.providers.forEach(provider => {
+    // Abuse.ch Section
+    const abuseDiv = document.createElement('div');
+    abuseDiv.className = 'api-key-input';
+    abuseDiv.style.borderBottom = '1px solid var(--border-color)';
+    abuseDiv.style.paddingBottom = '20px';
+    abuseDiv.style.marginBottom = '20px';
+    
+    const abuseKey = getCookie('apikey_abusech') || '';
+    
+    abuseDiv.innerHTML = '<label>Abuse.ch Ecosystem (URLHaus, MalwareBazaar, ThreatFox)</label>' +
+        '<input type="password" id="key-abusech" value="' + abuseKey + '" placeholder="Enter Abuse.ch API key...">' +
+        '<small>One key accesses all Abuse.ch services. Supports: IP, Domain, Hash. <a href="https://urlhaus.abuse.ch/api/" target="_blank">Get Key →</a></small>';
+    
+    form.appendChild(abuseDiv);
+    
+    // Other Providers
+    const abuseProviders = ['urlhaus', 'malwarebazaar', 'threatfox'];
+    
+    data.providers.filter(p => !abuseProviders.includes(p.name)).forEach(provider => {
         const div = document.createElement('div');
         div.className = 'api-key-input';
         
@@ -726,6 +744,17 @@ function saveApiKeys() {
             }
         }
     });
+    
+    // Abuse.ch key
+    const abuseInput = document.getElementById('key-abusech');
+    if (abuseInput) {
+        const value = abuseInput.value.trim();
+        if (value) {
+            setCookie('apikey_abusech', value, 365);
+        } else {
+            deleteCookie('apikey_abusech');
+        }
+    }
     
     alert('API keys saved!');
     loadActiveProviders();

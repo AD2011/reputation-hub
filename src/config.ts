@@ -53,10 +53,31 @@ export const PROVIDERS: Record<ProviderName, ProviderCapability> = {
     ip: false,
     domain: true,
     hash: true,
-    requiresKey: false,
+    requiresKey: true,
     hashTypes: ['md5', 'sha256'],
     description: 'Abuse.ch URLhaus - Malware URL and payload database',
-    freeTier: 'Unlimited (no key required)'
+    registrationUrl: 'https://urlhaus.abuse.ch/api/',
+    freeTier: 'Standard (requires free API key)'
+  },
+  malwarebazaar: {
+    ip: false,
+    domain: false,
+    hash: true,
+    requiresKey: true,
+    hashTypes: ['md5', 'sha1', 'sha256'],
+    description: 'Abuse.ch MalwareBazaar - Malware sample database',
+    registrationUrl: 'https://bazaar.abuse.ch/api/',
+    freeTier: 'Standard (requires free API key)'
+  },
+  threatfox: {
+    ip: true,
+    domain: true,
+    hash: true,
+    requiresKey: true,
+    hashTypes: ['md5', 'sha1', 'sha256'],
+    description: 'Abuse.ch ThreatFox - Indicator of Compromise (IOC) database',
+    registrationUrl: 'https://threatfox.abuse.ch/api/',
+    freeTier: 'Standard (requires free API key)'
   },
   shodan: {
     ip: true,

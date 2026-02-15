@@ -9,7 +9,7 @@ export class URLhausProvider extends BaseProvider {
     hash: true,
     hashTypes: ['md5', 'sha256'] // URLhaus only supports MD5 and SHA256
   };
-  requiresKey = false; // URLhaus is free and doesn't require an API key!
+  requiresKey = true;
   private baseUrl = 'https://urlhaus-api.abuse.ch/v1';
   
   async checkDomain(domain: string, apiKey: string): Promise<ProviderResult> {
@@ -19,6 +19,7 @@ export class URLhausProvider extends BaseProvider {
       
       const response = await fetch(`${this.baseUrl}/host/`, {
         method: 'POST',
+        headers: { 'API-KEY': apiKey },
         body: formData
       });
       
@@ -71,6 +72,7 @@ export class URLhausProvider extends BaseProvider {
       
       const response = await fetch(`${this.baseUrl}/payload/`, {
         method: 'POST',
+        headers: { 'API-KEY': apiKey },
         body: formData
       });
       

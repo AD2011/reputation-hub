@@ -9,6 +9,8 @@ export type ProviderName =
   | 'ipqs' 
   | 'greynoise' 
   | 'urlhaus' 
+  | 'malwarebazaar'
+  | 'threatfox'
   | 'shodan' 
   | 'censys';
 

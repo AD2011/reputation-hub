@@ -45,8 +45,12 @@ export async function handleCheck(request: Request, env: Env): Promise<Response>
     const cookieHeader = request.headers.get('Cookie') || '';
     const apiKeys = getApiKeysFromCookies(cookieHeader);
     
-    // URLhaus doesn't need a key
-    apiKeys['urlhaus'] = 'NO_KEY_REQUIRED';
+    // Handle Abuse.ch shared key
+    if (apiKeys['abusech']) {
+      if (!apiKeys['urlhaus']) apiKeys['urlhaus'] = apiKeys['abusech'];
+      if (!apiKeys['malwarebazaar']) apiKeys['malwarebazaar'] = apiKeys['abusech'];
+      if (!apiKeys['threatfox']) apiKeys['threatfox'] = apiKeys['abusech'];
+    }
     
     // Select eligible providers
     const eligibleProviders = selectProviders(inputType, apiKeys);
@@ -173,7 +177,13 @@ export async function handleBulkCheck(request: Request, env: Env): Promise<Respo
       // Get API keys
       const cookieHeader = request.headers.get('Cookie') || '';
       const apiKeys = getApiKeysFromCookies(cookieHeader);
-      apiKeys['urlhaus'] = 'NO_KEY_REQUIRED';
+      
+      // Handle Abuse.ch shared key
+      if (apiKeys['abusech']) {
+        if (!apiKeys['urlhaus']) apiKeys['urlhaus'] = apiKeys['abusech'];
+        if (!apiKeys['malwarebazaar']) apiKeys['malwarebazaar'] = apiKeys['abusech'];
+        if (!apiKeys['threatfox']) apiKeys['threatfox'] = apiKeys['abusech'];
+      }
       
       // Select providers
       const eligibleProviders = selectProviders(inputType, apiKeys);
@@ -279,6 +289,13 @@ export async function handleProviders(request: Request): Promise<Response> {
   try {
     const cookieHeader = request.headers.get('Cookie') || '';
     const apiKeys = getApiKeysFromCookies(cookieHeader);
+    
+    // Handle Abuse.ch shared key
+    if (apiKeys['abusech']) {
+      if (!apiKeys['urlhaus']) apiKeys['urlhaus'] = apiKeys['abusech'];
+      if (!apiKeys['malwarebazaar']) apiKeys['malwarebazaar'] = apiKeys['abusech'];
+      if (!apiKeys['threatfox']) apiKeys['threatfox'] = apiKeys['abusech'];
+    }
     
     const providersInfo = Object.entries(PROVIDERS).map(([name, config]) => ({
       name,
