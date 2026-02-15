@@ -560,12 +560,22 @@ function displayResults(results) {
     const container = document.getElementById('results-container');
     container.innerHTML = '';
     
+    if (!results || !Array.isArray(results)) {
+        console.error('Invalid results format:', results);
+        return;
+    }
+    
     results.forEach(result => {
+        if (!result) return;
+
+        const resultType = result.type ? result.type.toUpperCase() : 'UNKNOWN';
+        const timestamp = result.timestamp ? new Date(result.timestamp).toLocaleString() : 'N/A';
+
         const card = document.createElement('div');
         card.className = 'result-card';
         
         let html = '<div class="result-header">';
-        html += '<div><h3>' + result.target + '</h3><small>' + result.type.toUpperCase() + ' • ' + new Date(result.timestamp).toLocaleString() + '</small></div>';
+        html += '<div><h3>' + (result.target || 'Unknown Target') + '</h3><small>' + resultType + ' • ' + timestamp + '</small></div>';
         html += '<div>';
         if (result.summary) {
             const risk = result.summary.overallRisk;
